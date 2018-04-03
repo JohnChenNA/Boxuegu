@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import cn.edu.gdmec.android.boxuegu.Fragment.FragmentCourseFragment;
 import cn.edu.gdmec.android.boxuegu.Fragment.FragmentExercisesFragment;
 import cn.edu.gdmec.android.boxuegu.Fragment.FragmentMyinfoFragment;
+import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener{
     private TextView et_user_name;
@@ -26,6 +28,42 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TextView bottom_bar_text_exercises;
     private ImageView bottom_bar_image_exercises;
     private RelativeLayout bottom_bar_exercises_btn;
+    protected long exitTiem;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN){
+            if ((System.currentTimeMillis()-exitTiem)>2000){
+                Toast.makeText(MainActivity.this,"再按一次退出博学谷",Toast.LENGTH_SHORT).show();
+                exitTiem=System.currentTimeMillis();
+
+            }else{
+                this.finish();
+                if(AnalysisUtils.readLoginStatus(this)){
+
+                    AnalysisUtils.clearLoginStatus(this);
+                }
+                System.exit(0);
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data!=null){
+            boolean isLogin=data.getBooleanExtra("isLogin",false);
+            if (isLogin){
+                setSelectStatus(2);
+            }
+            else {
+                setSelectStatus(0);
+            }
+        }
+    }
+
     private TextView bottom_bar_text_myinfo;
     private ImageView bottom_bar_image_myinfo;
     private RelativeLayout bottom_bar_myinfo_btn;
