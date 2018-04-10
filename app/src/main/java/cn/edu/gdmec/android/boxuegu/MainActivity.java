@@ -127,6 +127,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 bottom_bar_image_myinfo.setImageResource(R.drawable.main_course_icon);
                 bottom_bar_text_myinfo.setTextColor(Color.parseColor("#666666"));
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,
+                        new FragmentCourseFragment()).commit();
 
                 break;
 
@@ -139,6 +141,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 bottom_bar_image_myinfo.setImageResource(R.drawable.main_my_icon);
                 bottom_bar_text_myinfo.setTextColor(Color.parseColor("#666666"));
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,
+                        new FragmentExercisesFragment()).commit();
                 break;
 
             case 2:
@@ -150,6 +154,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 bottom_bar_image_exercises.setImageResource(R.drawable.main_exercises_icon);
                 bottom_bar_text_exercises.setTextColor(Color.parseColor("#666666"));
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,
+                        new FragmentMyinfoFragment()).commit();
         }
     }
 

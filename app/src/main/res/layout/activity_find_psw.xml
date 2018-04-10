@@ -67,6 +67,22 @@
         android:textSize="15sp"
         android:visibility="gone"
         />
+
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:id="@+id/et_reset_psw"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:background="@drawable/find_psw_icon"
+        android:hint="请输入新密码"
+        android:paddingLeft="8dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textColorHint="#a3a3a3"
+        android:visibility="gone"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="40dp"
@@ -76,7 +92,7 @@
         android:layout_marginRight="35dp"
         android:id="@+id/btn_validate"
         android:background="@drawable/register_selector"
-        android:text="设 置"
+        android:text="验 证"
         android:textColor="@android:color/white"
         android:textSize="18sp"/>
 

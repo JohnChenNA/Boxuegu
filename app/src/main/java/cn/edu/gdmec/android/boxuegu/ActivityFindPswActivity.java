@@ -23,6 +23,7 @@ public class ActivityFindPswActivity extends Activity implements View.OnClickLis
     private EditText et_user_name;
     private EditText et_validate_name;
     private TextView tv_reset_psw;
+    private TextView et_reset_psw;
     private Button btn_validate;
 
     private String from;
@@ -52,6 +53,7 @@ public class ActivityFindPswActivity extends Activity implements View.OnClickLis
         tv_user_name = (TextView) findViewById(R.id.tv_user_name);
         et_user_name = (EditText) findViewById(R.id.et_user_name);
         et_validate_name = (EditText) findViewById(R.id.et_validate_name);
+        et_reset_psw = (EditText) findViewById(R.id.et_reset_psw);
         tv_reset_psw = (TextView) findViewById(R.id.tv_reset_psw);
         btn_validate = (Button) findViewById(R.id.btn_validate);
         if ("security".equals(from)){
@@ -75,6 +77,7 @@ public class ActivityFindPswActivity extends Activity implements View.OnClickLis
         // validate
 
         String validateName = et_validate_name.getText().toString().trim();
+        String newpsw = et_reset_psw.getText().toString().trim();
         if ("security".equals(from)){
             if (TextUtils.isEmpty(validateName)) {
                 Toast.makeText(this, "请输入要验证的姓名", Toast.LENGTH_SHORT).show();
@@ -99,10 +102,17 @@ public class ActivityFindPswActivity extends Activity implements View.OnClickLis
             }else if (!validateName.equals(sp_security)) {
                 Toast.makeText(this, "输入的密保不正确", Toast.LENGTH_SHORT).show();
                 return;
+//            }else if (TextUtils.isEmpty(newpsw)){
+//                Toast.makeText(ActivityFindPswActivity.this,"请输入密码",Toast.LENGTH_SHORT).show();
+//                return;
             }else {
                 tv_reset_psw.setVisibility(View.VISIBLE);
-                tv_reset_psw.setText("初始密码：123456");
-                savePsw(name);
+                tv_reset_psw.setText("请输入新密码");
+                et_reset_psw.setVisibility(View.VISIBLE);
+                btn_validate.setText("设 置");
+                savePsw(name,newpsw);
+                finish();
+
             }
         }
 
@@ -111,8 +121,9 @@ public class ActivityFindPswActivity extends Activity implements View.OnClickLis
 
     }
 
-    private void savePsw(String name) {
-        String md5Psw= MD5Utils.md5("123456");
+    private void savePsw(String name,String newpsw) {
+
+        String md5Psw= MD5Utils.md5(newpsw);
         SharedPreferences sp=getSharedPreferences("loginInfo",MODE_PRIVATE);
         SharedPreferences.Editor editor=sp.edit();
         editor.putString(name,md5Psw);
