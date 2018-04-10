@@ -1,6 +1,7 @@
 package cn.edu.gdmec.android.boxuegu;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -29,6 +30,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ImageView bottom_bar_image_exercises;
     private RelativeLayout bottom_bar_exercises_btn;
     protected long exitTiem;
+
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -59,7 +62,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 setSelectStatus(2);
             }
             else {
-                setSelectStatus(0);
+                setSelectStatus(2);
             }
         }
     }
@@ -74,14 +77,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         et_user_name = findViewById(R.id.et_user_name);
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        /*Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivityForResult(intent, 1);
-
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.main_body, new FragmentCourseFragment()).commit();
-
+*/
         setMain();
     }
 
@@ -179,6 +180,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private void setMain(){
         this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,
                 new FragmentMyinfoFragment()).commit();
-        setSelectStatus(2);
+        setSelectStatus(0);
     }
 }

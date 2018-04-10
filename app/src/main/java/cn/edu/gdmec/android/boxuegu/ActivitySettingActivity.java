@@ -1,7 +1,9 @@
 package cn.edu.gdmec.android.boxuegu;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,9 @@ public class ActivitySettingActivity extends Activity implements View.OnClickLis
     private RelativeLayout rl_security_setting;
     private RelativeLayout rl_exit_login;
     public static ActivitySettingActivity instance=null;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,14 @@ public class ActivitySettingActivity extends Activity implements View.OnClickLis
         rl_exit_login.setOnClickListener(this);
     }
 
+    private void clearLoginStatus() {
+        SharedPreferences sp=getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sp.edit();
+        editor.putBoolean("isLogin",false);
+        editor.putString("loginUserName","");
+        editor.commit();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -60,6 +73,11 @@ public class ActivitySettingActivity extends Activity implements View.OnClickLis
             case R.id.rl_modify_psw:
                 Intent intent=new Intent(ActivitySettingActivity.this,ActivityModifyPswActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.rl_security_setting:
+                Intent intent2=new Intent(ActivitySettingActivity.this,ActivityFindPswActivity.class);
+                intent2.putExtra("from","security");
+                startActivity(intent2);
                 break;
             case R.id.rl_exit_login:
                 Toast.makeText(this,"退出登陆成功",Toast.LENGTH_SHORT).show();

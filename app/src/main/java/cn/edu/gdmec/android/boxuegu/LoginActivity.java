@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.edu.gdmec.android.boxuegu.Fragment.FragmentMyinfoFragment;
 import cn.edu.gdmec.android.boxuegu.utils.MD5Utils;
 
 public class LoginActivity extends AppCompatActivity {
@@ -63,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //跳转到找回密码页面
-                /*Intent intent = new Intent(LoginActivity.this,FindPswActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(LoginActivity.this,ActivityFindPswActivity.class);
+                startActivity(intent);
             }
         });
         //登录按钮点击事件
@@ -91,6 +92,10 @@ public class LoginActivity extends AppCompatActivity {
                     data.putExtra("userName",username);
                     setResult(RESULT_OK,data);
                     LoginActivity.this.finish();
+
+
+
+
                     //跳到主页
                     return;
                    /* Intent intent=new Intent(LoginActivity.this,MainActivity.class);
