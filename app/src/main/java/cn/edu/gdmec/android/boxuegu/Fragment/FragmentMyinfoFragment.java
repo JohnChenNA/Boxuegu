@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import cn.edu.gdmec.android.boxuegu.ActivitySettingActivity;
+import cn.edu.gdmec.android.boxuegu.ActivityUserInfoActivity;
 import cn.edu.gdmec.android.boxuegu.LoginActivity;
 import cn.edu.gdmec.android.boxuegu.R;
 import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
@@ -61,7 +62,8 @@ public class FragmentMyinfoFragment extends Fragment implements View.OnClickList
         switch (v.getId()){
             case R.id.ll_head:
                 if(AnalysisUtils.readLoginStatus(getActivity())){
-
+                    Intent intent=new Intent(getActivity(), ActivityUserInfoActivity.class);
+                    getActivity().startActivity(intent);
                 }else{
                     Intent intent=new Intent(getActivity(), LoginActivity.class);
                     getActivity().startActivityForResult(intent,1);
