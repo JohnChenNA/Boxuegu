@@ -3,13 +3,16 @@ package cn.edu.gdmec.android.boxuegu.Adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import cn.edu.gdmec.android.boxuegu.ActivityExercisesDetailActivity;
 import cn.edu.gdmec.android.boxuegu.Bean.ExercisesBean;
 import cn.edu.gdmec.android.boxuegu.R;
 
@@ -60,7 +63,7 @@ public class ExerciseListItemAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void initializeViews(ExercisesBean object, ViewHolder holder,int position,View convertView) {
+    private void initializeViews(ExercisesBean object, ViewHolder holder, int position, final View convertView) {
         final ExercisesBean bean=getItem(position);
         if (bean!=null){
             holder.tvOrder.setText(position +1 + "");
@@ -72,6 +75,10 @@ public class ExerciseListItemAdapter extends BaseAdapter {
                     if (bean ==null){
                         return;
                     }
+                    Intent intent = new Intent(context, ActivityExercisesDetailActivity.class);
+                    intent.putExtra("id",bean.id);
+                    intent.putExtra("title",bean.title);
+                    ((Activity)context).startActivityForResult(intent,000);
                 }
             });
         }
