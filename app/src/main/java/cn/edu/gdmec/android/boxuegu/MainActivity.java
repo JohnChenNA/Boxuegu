@@ -64,9 +64,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             else {
                 setSelectStatus(2);
             }
-            if(requestCode==000){
-                setSelectStatus(1);
-            }
+
+        }
+        if(requestCode==000){
+            this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,
+                    new FragmentExercisesFragment()).commit();
+            setSelectStatus(1);
         }
     }
 
@@ -166,19 +169,19 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bottom_bar_course_btn:
-                this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,
                         new FragmentCourseFragment()).commit();
                 setSelectStatus(0);
                 break;
 
             case R.id.bottom_bar_exercises_btn:
-                this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,
                         new FragmentExercisesFragment()).commit();
                 setSelectStatus(1);
                 break;
 
             case R.id.bottom_bar_myinfo_btn:
-                this.getSupportFragmentManager().beginTransaction().add(R.id.main_body,
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.main_body,
                         new FragmentMyinfoFragment()).commit();
                 setSelectStatus(2);
                 break;

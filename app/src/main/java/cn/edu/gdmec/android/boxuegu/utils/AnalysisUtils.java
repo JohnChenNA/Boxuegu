@@ -29,6 +29,20 @@ public class AnalysisUtils {
         boolean isLogin=sharedPreferences.getBoolean("isLogin",false);
         return isLogin;
     }
+
+    public static boolean readExercises(Context context, int i){
+        SharedPreferences sharedPreferences=context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+        boolean isDone=sharedPreferences.getBoolean("isDone"+i,false);
+        return isDone;
+    }
+
+    public static void saveExercises(Context context, int i){
+        SharedPreferences sp = context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("isDone"+i,true);
+        editor.commit();
+    }
+
     public static void clearLoginStatus(Context context){
         SharedPreferences sp=context.getSharedPreferences("loginInfo",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sp.edit();

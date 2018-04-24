@@ -15,6 +15,7 @@ import android.widget.TextView;
 import cn.edu.gdmec.android.boxuegu.ActivityExercisesDetailActivity;
 import cn.edu.gdmec.android.boxuegu.Bean.ExercisesBean;
 import cn.edu.gdmec.android.boxuegu.R;
+import cn.edu.gdmec.android.boxuegu.utils.AnalysisUtils;
 
 public class ExerciseListItemAdapter extends BaseAdapter {
 
@@ -68,6 +69,12 @@ public class ExerciseListItemAdapter extends BaseAdapter {
         if (bean!=null){
             holder.tvOrder.setText(position +1 + "");
             holder.tvTitle.setText(bean.title);
+            if (AnalysisUtils.readExercises(context, (position+1) )){
+                holder.tvContent.setText("已完成");
+            }else{
+                holder.tvContent.setText(bean.content);
+            }
+
             holder.tvOrder.setBackgroundResource(bean.background);
             convertView.setOnClickListener(new View.OnClickListener(){
                 @Override
